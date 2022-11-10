@@ -14,6 +14,8 @@ if(!$con) die("Connnect mysql database fail!!".mysqli_connect_error());
 $sql="INSERT INTO order_product (fname, lname,address,mobile)";
 $sql.="VALUES ('$fname', '$lname', '$address','$mobile');";
 //echo $sql;
+
+$last_id;
 if (mysqli_query($con, $sql)) {
     $last_id = mysqli_insert_id($con);
     //echo "New record created successfully. Last inserted ID is: " . $last_id;
@@ -33,8 +35,14 @@ if (mysqli_query($con, $sql)) {
   } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
   }
-  
+//echo $last_id;
+
+$_SESSION["sent_id"]=$last_id; 
   mysqli_close($conn);
 //$result=mysqli_query($con,$sql);
 //$numrow=mysqli_num_rows($result);
 ?>
+<script>
+    window.alert("แสดงสินค้า");
+    window.location.replace("showlist_product.php");
+</script>
